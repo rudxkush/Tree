@@ -1,5 +1,4 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 vector<int> tree[200001];
@@ -53,4 +52,37 @@ int main() {
     }
     solve(1,0);
     cout << max(dp[1][0], dp[1][1]);
+}
+
+// Another approach (Simple & Equally complex as the above solution)
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> tree[200001];
+set<int> st;
+
+void dfs(int node, int parent) {
+    for (int child : tree[node]) {
+        if (child == parent) continue;
+        dfs(child, node);
+    }
+
+    // if both node and parent are not already covered
+    if (parent != 0 && st.find(node) == st.end() && st.find(parent) == st.end()) {
+        st.insert(node);
+        st.insert(parent);
+    }
+}
+int main() {
+    int n;
+    cin >> n;
+    for (int i = 1; i < n; i++) {
+        int u, v;
+        cin >> u >> v;
+        tree[u].push_back(v);
+        tree[v].push_back(u);
+    }
+
+    dfs(1, 0);
+    cout << st.size() / 2;
 }
