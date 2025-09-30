@@ -1,13 +1,13 @@
 class Solution {
 public:
-    int res = 0; // diameter in terms of edges (or nodes - 1)
+    int res = 0; 
 
     int dfs(vector<vector<int>>& graph, int node, int parent) {
         int longest = 0, secondLongest = 0;
 
         for (auto nei : graph[node]) {
             if (nei == parent) continue;
-            int len = dfs(graph, nei, node); // length from child
+            int len = dfs(graph, nei, node); 
           
             if (len > secondLongest) {
                 secondLongest = len;
@@ -18,7 +18,7 @@ public:
         }
         res = max(res, longest + secondLongest);
 
-        return 1 + longest; // return longest path from this node to leaf
+        return 1 + longest;
     }
 
     int treeDiameter(vector<vector<int>>& edges) {
