@@ -17,10 +17,10 @@ int rec(vector<vector<int>>& tree, int node, int parent, bool parentPick) {
         for(auto nei : tree[node]) {
             if(nei == parent) continue;
             /*
-                    Basically, what I’m saying is that whenever we have a bigger subtree, we consider it. 
+                    Basically, whenever we have a bigger subtree, we consider it. 
                     So in short, 1 + rec(nei, true) + (base - rec(nei, false))
-                    gives the total number of edges more or less. You can always choose the edge leading 
-                    to the bigger subtree to maximize the matching.
+                    gives the total number of edges more or less. You can always 
+                    choose the edge leading to the bigger subtree to maximize the matching.
             */
             int pick = 1 + rec(tree, nei, node, true) + (notPick - rec(tree, nei, node, false));
             best = max(best, pick);
